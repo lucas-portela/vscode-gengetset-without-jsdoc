@@ -1,3 +1,7 @@
+# This VSCode Extension is a fork
+This extension is a fork of the great [cybertim/vscode-gengetset](https://github.com/cybertim/vscode-gengetset).
+I just removed the useless JSDoc generated lines that I couldn't remove through the original extension settings.
+
 # Optimize / Auto Imports, Generate Getters / Setters and Constructors
 
 **Simply click on the Light Bulb to add the missing import line**
