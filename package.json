@@ -1,9 +1,9 @@
 {
-    "name": "vscode-generate-getter-setter",
+    "name": "vscode-gengetset-without-jsdoc",
     "displayName": "TypeScript Toolbox",
     "description": "Add and Optimize Imports, Generate Getters / Setters and Constructors",
     "version": "0.5.0",
-    "publisher": "DSKWRK",
+    "publisher": "LSNP",
     "icon": "icon.png",
     "galleryBanner": {
         "color": "#d4d3d3",
