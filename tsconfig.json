@@ -1,15 +1,17 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6",
-        "outDir": "out",
-        "noLib": true,
-        "sourceMap": true,
-        "rootDir": "."
-    },
-    "exclude": [
-        "node_modules",
-        "typings/browser.d.ts",
-        "typings/browser/**"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2019",
+    "lib": ["ES2019"],
+    "outDir": "out",
+
+    "sourceMap": true,
+    "rootDir": "."
+  },
+  "exclude": [
+    "node_modules",
+    ".vscode-test",
+    "typings/browser.d.ts",
+    "typings/browser/**"
+  ]
 }
