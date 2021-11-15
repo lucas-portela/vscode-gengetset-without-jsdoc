@@ -2,7 +2,7 @@
   "name": "vscode-gengetset-without-jsdoc",
   "displayName": "TypeScript Toolbox (Without JSDoc Stuff)",
   "description": "Add and Optimize Imports, Generate Getters / Setters and Constructors",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "publisher": "LSNP",
   "icon": "icon.png",
   "galleryBanner": {
@@ -13,7 +13,7 @@
     "codeActionProvider": "true"
   },
   "engines": {
-    "vscode": "^1.62.0"
+    "vscode": "^1.54.0"
   },
   "repository": {
     "type": "git",
@@ -62,6 +62,14 @@
       {
         "command": "genGetSet.allGetterAndSetter",
         "title": "TypeScript: Generate ALL Getter and Setter"
+      },
+      {
+        "command": "genGetSet.allGetter",
+        "title": "TypeScript: Generate ALL Getters"
+      },
+      {
+        "command": "genGetSet.allSetter",
+        "title": "TypeScript: Generate ALL Setters"
       },
       {
         "command": "genGetSet.constructor",
@@ -166,7 +174,7 @@
   "devDependencies": {
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.11.7",
-    "@types/vscode": "^1.62.0",
+    "@types/vscode": "^1.54.0",
     "typescript": "^4.4.4",
     "vsce": "^2.3.0",
     "vscode-test": "^1.6.1"

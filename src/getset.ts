@@ -74,8 +74,8 @@ export function generateCode(
 
 // generate multiple line, can't call vscode.window.activeTextEditor.edit(builder => {}) serveral time by command, don't know why
 export function generateAllGetterAndSetter(
-  classesListGetter,
-  classesListSetter
+  classesListGetter = null,
+  classesListSetter = null
 ) {
   const currentPos = new vscode.Position(
     vscode.window.activeTextEditor.selection.active.line,
@@ -84,13 +84,15 @@ export function generateAllGetterAndSetter(
 
   let totalString = "";
 
-  classesListGetter[0].vars.forEach((variable) => {
-    totalString += createGetter(variable);
-  });
+  if (classesListGetter)
+    classesListGetter[0].vars.forEach((variable) => {
+      totalString += createGetter(variable);
+    });
 
-  classesListSetter[0].vars.forEach((variable) => {
-    totalString += createSetter(variable);
-  });
+  if (classesListSetter)
+    classesListSetter[0].vars.forEach((variable) => {
+      totalString += createSetter(variable);
+    });
 
   vscode.window.activeTextEditor.edit((builder) => {
     builder.insert(currentPos, totalString);
@@ -244,25 +246,13 @@ function createGetter(item: IVar) {
       "public get" +
       item.name.charAt(0).toUpperCase() +
       item.name.substring(1) +
-      "(): " +
-      item.typeName +
-      " {\n" +
-      "\t\treturn this." +
+      "() {return this." +
       item.name +
-      ";\n" +
-      "\t}\n"
+      ";}\n"
     );
   } else {
     return (
-      "public get " +
-      item.figure +
-      "(): " +
-      item.typeName +
-      " {\n" +
-      "\t\treturn this." +
-      item.name +
-      ";\n" +
-      "\t}\n"
+      "public get " + item.figure + "(){ return this." + item.name + ";}\n"
     );
   }
 }
@@ -276,11 +266,9 @@ function createSetter(item: IVar) {
       item.name.substring(1) +
       "(value: " +
       item.typeName +
-      ") {\n" +
-      "\t\tthis." +
+      ") { this." +
       item.name +
-      " = value;\n" +
-      "\t}\n"
+      " = value; }\n"
     );
   } else {
     return (
@@ -288,11 +276,9 @@ function createSetter(item: IVar) {
       item.figure +
       "(value: " +
       item.typeName +
-      ") {\n" +
-      "\t\tthis." +
+      ") { this." +
       item.name +
-      " = value;\n" +
-      "\t}\n"
+      " = value; }\n"
     );
   }
 }

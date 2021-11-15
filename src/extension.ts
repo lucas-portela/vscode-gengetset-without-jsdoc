@@ -109,6 +109,20 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
   context.subscriptions.push(
+    vscode.commands.registerCommand("genGetSet.allGetter", function () {
+      const classesListGetter = generateClassesList(EType.GETTER);
+
+      generateAllGetterAndSetter(classesListGetter, null);
+    })
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("genGetSet.allSetter", function () {
+      const classesListSetter = generateClassesList(EType.SETTER);
+
+      generateAllGetterAndSetter(null, classesListSetter);
+    })
+  );
+  context.subscriptions.push(
     vscode.commands.registerCommand("genGetSet.getterAndSetter", function () {
       const classesList = generateClassesList(EType.BOTH);
       vscode.window
@@ -145,8 +159,16 @@ export function activate(context: vscode.ExtensionContext) {
             description: "generate a constructor based on privates",
           },
           <vscode.QuickPickItem>{
-            label: "Getter and Setter ALL",
+            label: "ALL Getter and Setter",
             description: "generate all setter and getter for your class",
+          },
+          <vscode.QuickPickItem>{
+            label: "Getter ALL",
+            description: "generate all getter for your class",
+          },
+          <vscode.QuickPickItem>{
+            label: "Setter ALL",
+            description: "generate all setter for your class",
           },
           <vscode.QuickPickItem>{
             label: "Getter and Setter",
@@ -162,34 +184,28 @@ export function activate(context: vscode.ExtensionContext) {
           },
         ])
         .then((result) => {
-          if (result && result.label.indexOf("Add Import") !== -1) {
-            vscode.commands.executeCommand("genGetSet.addImport");
-          } else if (
-            result &&
-            result.label.indexOf("Optimize Imports") !== -1
-          ) {
-            vscode.commands.executeCommand("genGetSet.sortImports");
-          } else if (
-            result &&
-            result.label.indexOf("Rescan Workspace") !== -1
-          ) {
-            vscode.commands.executeCommand("genGetSet.scanImports");
-          } else if (
-            result &&
-            result.label.indexOf("Getter and Setter") !== -1
-          ) {
-            vscode.commands.executeCommand("genGetSet.getterAndSetter");
-          } else if (
-            result &&
-            result.label.indexOf("ALL Getter and Setter") !== -1
-          ) {
-            vscode.commands.executeCommand("genGetSet.allGetterAndSetter");
-          } else if (result && result.label.indexOf("Getter") !== -1) {
-            vscode.commands.executeCommand("genGetSet.getter");
-          } else if (result && result.label.indexOf("Setter") !== -1) {
-            vscode.commands.executeCommand("genGetSet.setter");
-          } else if (result) {
-            vscode.commands.executeCommand("genGetSet.constructor");
+          if (result) {
+            if (result.label.indexOf("Add Import") !== -1) {
+              vscode.commands.executeCommand("genGetSet.addImport");
+            } else if (result.label.indexOf("Optimize Imports") !== -1) {
+              vscode.commands.executeCommand("genGetSet.sortImports");
+            } else if (result.label.indexOf("Rescan Workspace") !== -1) {
+              vscode.commands.executeCommand("genGetSet.scanImports");
+            } else if (result.label.indexOf("Getter and Setter") !== -1) {
+              vscode.commands.executeCommand("genGetSet.getterAndSetter");
+            } else if (result.label.indexOf("ALL Getter and Setter") !== -1) {
+              vscode.commands.executeCommand("genGetSet.allGetterAndSetter");
+            } else if (result.label.indexOf("ALL Getter") !== -1) {
+              vscode.commands.executeCommand("genGetSet.allGetter");
+            } else if (result.label.indexOf("ALL Setter") !== -1) {
+              vscode.commands.executeCommand("genGetSet.allSetter");
+            } else if (result.label.indexOf("Getter") !== -1) {
+              vscode.commands.executeCommand("genGetSet.getter");
+            } else if (result.label.indexOf("Setter") !== -1) {
+              vscode.commands.executeCommand("genGetSet.setter");
+            } else {
+              vscode.commands.executeCommand("genGetSet.constructor");
+            }
           }
         });
     })
